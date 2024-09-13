@@ -30,6 +30,12 @@ function HomePage() {
             navigate("/star");
           }}
         ></Button>
+        <Button
+          title="응급 의료기관 조회하기"
+          onClick={() => {
+            navigate("/search");
+          }}
+        ></Button>
       </Container>
     </Wrapper>
   );
