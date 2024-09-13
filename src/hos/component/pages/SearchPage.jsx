@@ -65,7 +65,7 @@ function SearchPage() {
   // 저장 버튼 클릭 시 해당 병원 정보 저장
   const saveHandler = async (hosItem) => {
     try {
-      await api.post("/api/saveHosInfo", hosItem); // API로 정보 저장
+      await api.post("/hosinfo/save", hosItem); // API로 정보 저장
       alert("저장되었습니다.");
     } catch (err) {
       console.log(err);
