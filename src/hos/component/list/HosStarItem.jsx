@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import Button from "../../component/ui/Button";
+import api from "../api/axios";
+import { useNavigate } from "react-router-dom";
 
 const Wrapper = styled.div`
   width: calc(100% - 32px);
@@ -22,6 +25,17 @@ const Context = styled.p`
 `;
 
 function HosStarItem(props) {
+  const navigate = useNavigate();
+  const deleteHandler = async (id) => {
+    console.log("id : " + id);
+    try {
+      const response = await api.delete(`/hosinfo/delete/${id}`);
+      console.log(response.status);
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <Wrapper>
       {/* <TitleText>{props.data.dutyName}</TitleText> */}
@@ -33,6 +47,9 @@ function HosStarItem(props) {
           전화번호: {props.data.dutytel}
         </div>
       </Context>
+      <Button title="삭제하기" onClick={() => deleteHandler(props.data.id)}>
+        {" "}
+      </Button>
     </Wrapper>
   );
 }

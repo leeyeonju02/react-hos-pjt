@@ -4,6 +4,7 @@ import { useState } from "react";
 import TextInput from "../../component/ui/TextInput";
 import Button from "../../component/ui/Button";
 import Modal from "../../component/pages/Modal.jsx";
+import { useNavigate } from "react-router-dom";
 
 const Wrapper = styled.div`
   padding: 16px;
@@ -39,6 +40,7 @@ function SearchPage() {
   const [detail, setDetail] = useState(null); // 모달에 표시할 상세 데이터
   const [hosList, setHosList] = useState([]); // 병원 정보 리스트 상태 추가
   const [isModalOpen, setIsModalOpen] = useState(false); //모달 상태
+  const navigate = useNavigate();
 
   const Q0Handler = (e) => {
     setQ0(e.target.value);
@@ -104,6 +106,12 @@ function SearchPage() {
   return (
     <Wrapper>
       <Container>
+        <Button
+          title="뒤로가기"
+          onClick={() => {
+            navigate("/");
+          }}
+        ></Button>
         <label>
           주소(시도) : <TextInput height={20} value={Q0} onChange={Q0Handler} />
         </label>
