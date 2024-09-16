@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import api from "../api/axios.js";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import TextInput from "../../component/ui/TextInput";
 import Button from "../../component/ui/Button";
+import Modal from "../../component/pages/Modal.jsx";
 
 const Wrapper = styled.div`
   padding: 16px;
@@ -12,6 +13,7 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
 const Container = styled.div`
   width: 100%;
   max-width: 720px;
@@ -21,6 +23,7 @@ const Container = styled.div`
     }
   }
 `;
+
 const ListItem = styled.div`
   display: flex;
   justify-content: space-between;
@@ -33,14 +36,18 @@ function SearchPage() {
   const [Q0, setQ0] = useState("");
   const [Q1, setQ1] = useState("");
   const [QT, setQT] = useState("");
+  const [detail, setDetail] = useState(null); // 모달에 표시할 상세 데이터
   const [hosList, setHosList] = useState([]); // 병원 정보 리스트 상태 추가
+  const [isModalOpen, setIsModalOpen] = useState(false); //모달 상태
 
   const Q0Handler = (e) => {
     setQ0(e.target.value);
   };
+
   const Q1Handler = (e) => {
     setQ1(e.target.value);
   };
+
   const QTHandler = (e) => {
     setQT(e.target.value);
   };
@@ -72,6 +79,28 @@ function SearchPage() {
     }
   };
 
+  // 상세보기 버튼 클릭 시 모달을 열고 병원 상세 정보를 받아옴
+  const detailHandler = async (hpid) => {
+    console.log("상세보기 hpid:", hpid);
+    try {
+      const response = await api.get("/api/Hosdetail", {
+        params: {
+          hpid: hpid,
+        },
+      });
+      console.log(response.data);
+      setDetail(response.data); // 상세 정보 설정
+      setIsModalOpen(true); // 모달 오픈
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // 모달 닫기 함수
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <Wrapper>
       <Container>
@@ -97,9 +126,19 @@ function SearchPage() {
               전화번호: {hosItem.dutyTel1}
             </div>
             <Button title="저장" onClick={() => saveHandler(hosItem)} />
+            {/* hpid 값을 detailHandler로 전달 */}
+            <Button
+              title="상세보기"
+              onClick={() => detailHandler(hosItem.hpid)}
+            />
           </ListItem>
         ))}
       </Container>
+
+      {/* 모달 컴포넌트 */}
+      {isModalOpen && detail && (
+        <Modal isOpen={isModalOpen} onClose={closeModal} hosDetail={detail} />
+      )}
     </Wrapper>
   );
 }

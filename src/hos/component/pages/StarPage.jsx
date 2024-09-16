@@ -31,7 +31,7 @@ function StarPage(props) {
     try {
       const response = await api.get("hosinfo/index");
       setLst(response.data);
-      console.log("debug >>> axios get OK!", response.data);
+      console.log("debug >>> axios get OK! star", response.data);
     } catch (err) {
       console.log(err);
     }

@@ -15,10 +15,7 @@ const Wrapper = styled.div`
     background: lightgrey;
   }
 `;
-const TitleText = styled.p`
-  font-size: 15px;
-  font-weight: 500;
-`;
+
 const Context = styled.p`
   font-size: 13px;
   font-weight: 500;
@@ -27,11 +24,14 @@ const Context = styled.p`
 function HosStarItem(props) {
   return (
     <Wrapper>
-      <TitleText>{props.data.dutyname}</TitleText>
+      {/* <TitleText>{props.data.dutyName}</TitleText> */}
       <Context>
-        {" "}
-        주소 : {props.data.dutyaddr} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 전화 :{" "}
-        {props.data.dutytel}
+        <div>
+          <strong>{props.data.dutyName}</strong> {props.data.dutyDivName}
+          <br />
+          주소: {props.data.dutyAddr} <br />
+          전화번호: {props.data.dutytel}
+        </div>
       </Context>
     </Wrapper>
   );
