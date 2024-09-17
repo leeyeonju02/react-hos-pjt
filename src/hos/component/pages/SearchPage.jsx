@@ -16,7 +16,9 @@ const Wrapper = styled.div`
 `;
 
 const Container = styled.div`
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 60%;
   max-width: 720px;
   & > * {
     :not(:last-child) {
