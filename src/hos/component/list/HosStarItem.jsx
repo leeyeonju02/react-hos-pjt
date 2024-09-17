@@ -36,6 +36,7 @@ function HosStarItem(props) {
       console.log(err);
     }
   };
+
   return (
     <Wrapper>
       {/* <TitleText>{props.data.dutyName}</TitleText> */}
