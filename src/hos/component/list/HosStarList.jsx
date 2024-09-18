@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import HosStarItem from "./HosStarItem";
-import Button from "../../component/ui/Button";
+
 import { useNavigate } from "react-router-dom";
 const Wrapper = styled.div`
   display: flex;
@@ -16,8 +16,9 @@ const Wrapper = styled.div`
 `;
 
 const Container = styled.div`
+  margin-top: 20px;
   width: 100%;
-  max-width: 720px;
+
   & > * {
     :not(:last-child) {
       margin-bottom: 16px;
@@ -30,12 +31,15 @@ function HosStarList(props) {
 
   return (
     <Wrapper>
-      <Button
-        title="뒤로가기"
+      <button
+        type="button"
+        class="btn btn-outline-secondary btn-lg"
         onClick={() => {
           navigate("/");
         }}
-      ></Button>
+      >
+        뒤로가기
+      </button>
       <Container>
         {data.map((hos) => (
           <HosStarItem key={hos.id} data={hos} /> //data라는 props로 데이터를 넘겨줌

@@ -36,7 +36,7 @@ function Modal({ isOpen, onClose, hosDetail }) {
 
     // Kakao Maps 스크립트 로드
     const script = document.createElement("script");
-    script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=&autoload=false`;
+    script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=278d30c7d8ea9268166cee76781db0ba&autoload=false`;
     script.async = true;
 
     script.onload = () => {
